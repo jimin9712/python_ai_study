@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+    조건문 : Conditional Statements 에서
+
+
+    거짓(Falsy) 으로 평가될때!
+        false, 0, '', null, undefined, NaN   <-- 'Falsy 한 값'이라 한다
+
+
+    참(Truthy) 으로 평가될때
+        true, 37, 'Mark', {}, [], Infinity   <-- 'Truthy 한 값' 이라 한다
+                          ->  -> Python에서는 False
+
+    https://developer.mozilla.org/ko/docs/Glossary/Truthy
+    https://developer.mozilla.org/ko/docs/Glossary/Falsy
+
+*/  
+        function print(data){
+            if (data)
+                document.write(`${data} --> Truthy 판정<br>`)
+            
+            else
+                document.write(`${data} --> Falsy 판정<br>` )
+            
+        }
+        print(false);
+        print(0);
+        print(0.0);
+        print('');
+        print(null);
+        document.write("<hr>")
+
+
+        print(37);
+        print('Mark');
+        print(' ');
+        print({a : 10 , b : 20});
+        print([10,20,30]);
+        print({});
+        print([]);
+
+        print(1 == "1"); // == '값만 비교'
+        document.write("<hr>")
+        print(1 === "1"); // ==='값과 타입'의 비교
+
+                /*****************************************************
+        * Short Circuit Evaluation (단축평가)  (혹은 Lazy Evalutaion 이라고도 한다)
+        *
+        * 표현식1 && 표현식2
+        *  표현식1 이 Falsy 이면 && 의 결과값은 표현식1
+        *  표현식1 이 Truthy 이면 && 의 결과값은 표현식2
+        *
+        * 표현식1 || 표현식2
+        *  표현식1 이 Falsy 이면 && 의 결과값은 표현식2
+        *  표현식1 이 Truthy 이면 && 의 결과값은 표현식1
+        */
+
+        let result;
+        // &&, || <-- and, or 연산자
+
+        result = true && false;
+        print(result);
+
+        result = true || false;
+        document.write("<hr>")
+        print(result);
+
+    
+        result = 0 || 100;
+        print(result); //100! or 연산자이기 때문에 왼쪽이 거지이면 오른쪽 값 출력
+
+        result = 'abc' || '';
+        print(result)
+        document.write("<hr>")
+
+        result = 0 && 100;
+        print(result);
+
+        result = 'abc' && 123;
+        print(result); // 왼쪽이 참이기 때문에 오른쪽의 값의 따라 결과를 출력
+        // ----------------ShortCircit Evaluation-----------------------
+
+
+
+
+    </script>
+
+</body>
+</html>

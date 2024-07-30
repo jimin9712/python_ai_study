@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!--
+    JS의 자료형(data type) : https://www.w3schools.com/js/js_datatypes.asp
+   
+    number
+    string
+    boolean
+    array
+    object
+    function
+    undefined
+   
+    JS의 자료형(타입) 은 가변적(dynamic) 하다.
+   
+ -->
+ <script>
+    // 도우미 함수
+    function wrType(desc, c){
+        document.write(`${desc} ${c} [${typeof c}]<br>`); // = type JavaScript에서는 연산자임
+        
+    }
+ </script>
+ <script>
+    let x; // 선언만 하고 초기화를 안하면 undefind 값을 가짐
+    wrType("x = ", x);
+    
+    x = 'JavaScript';
+    wrType("x = ", x);
+    
+    x = 5;
+    wrType("x = ", x);
+    
+    x = 3.14;
+    wrType("x = ", x);
+
+    x = true; //true, false 
+    wrType("x = ", x);
+
+    x = [10,20,30]; //array
+    wrType("x = ", x);
+
+    wrType("x.length = ", x.length); 
+
+    i = 0;
+    while( i < x.length){
+        wrType(`x[${i}] = `,x[i])
+        i++;
+    }
+
+    wrType('x[3] = ', x[3]);
+
+    //for ~ of 사용하여 배열의 '값' 순환
+    for(v of x){
+        wrType('v = ', v);
+    }
+
+    document.write("<hr>")
+    // object 타입
+    // {property.value, property:value, ...}
+
+    x = {firstName:"John", lastName:"Doe"};
+    wrType("x = ", x);
+    wrType("x.firstName =", x.firstName);
+    wrType("x.lastName = ", x.lastName);
+    wrType("x.age = ", x.age);
+    wrType("x['firstName'] = ", x['firstName']);
+
+
+    // Object.keys(object)   :  key 들만 추출
+    // Object.values(object)  : value 들만 추출
+    // Object.entries(object)  : [key, value] 들을 추출 -> 파이썬에서 item 비슷
+    document.write('<hr>')
+    for(key of Object.keys(x)){
+        wrType('key = ', key);
+    }
+
+    document.write('<hr>')
+    for(v of Object.values(x)){
+        wrType('v = ', v);
+    }
+
+    document.write('<hr>')
+    for(e of Object.entries(x)){
+        wrType(`e[0] = `, e[0]);
+        wrType(`e[1] = `, e[1]);
+    }
+    
+</script>
+
+<body>
+   <H1></H1>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .important {
+          color:red;
+        }
+        </style>    
+</head>
+<!--
+    form validation (폼 검증)
+    form 데이터를 서버에 제출(submit) 하기 전에
+    클라이언트에서 1차적으로 값의 유효성을 체크해주는게 좋다.
+    이때 JavaScript 를 사용하여 검증합니다.
+   
+    ex)
+        - '필수 항목'들은 입력이 되었는지?
+        - 숫자만 입력하는 경우 숫자로만 입력되었는지?
+        - n글자 이상이 입력되었는지?
+        - checkbox 의 경우 n개 이상이 체크 되었는지?
+        - 특정포맷 (이메일, url 등..) 으로 입력되었는지?
+   
+    <form> 의 onsubmit 이벤트 처리 코드
+        : true 를 return 하면 정상적으로 submit 됨
+        : false 를 return 하면 submit 안됨
+   
+    ★주의! <form> 안의 <button> 에 type을 특별히 명시 안하면 submit 버튼으로 작동한다!    
+   
+    focus() 함수 : 해당 form element 에 입력상태(focus) 지정 → onfocus 이벤트 발동
+    blur() 함수 : 해당 form element 에 입력상태 해제 → onblur 이벤트 발동  
+    submit() 함수 : 해당 form 을 submit 함
+
+
+    required attribute 사용 :
+-->
+
+<body>
+    <h2>Form validation</h2>
+    <hr>
+    <script>
+        function chkSubmit1(){
+            const frm = document.forms['form1']
+           if(frm.firstname.value.trim()==""){//or frm=['firstname']
+                alert("First name은 필수입니다!");
+                frm.firstname.focus();
+                return false;// onsubmit 에 false 리턴하면 submit 진행안됨.
+           } 
+           return true; // onsubmit 에 true를 리턴하면 submit 진행된다.
+
+
+        }
+    </script>
+<h4>form1</h4>
+<form name="form1" action="https://www.w3schools.com/action_page.php" method="get"
+    onsubmit="return chkSubmit1()">  
+    <!-- <form> 의 onsubmit 이벤트 처리 코드
+        : true 를 return 하면 정상적으로 submit 됨
+        : false 를 return 하면 submit 안됨 -->
+  First name:
+  <input type="text" name="firstname"> <span class="important">*</span>   
+  <!-- 기본값 value 가 없다. -->
+  <br><br>
+  Last name:
+  <input type="text" name="lastname">
+  <br><br>
+  <input type="submit" value="제출">
+</form>
+<hr>
+<h4>form3 - 숫자검증</h4>
+<script>
+    function ChkSubmit3(){
+        const frm = document.forms.form3
+        let age = frm.age.value.trim(); 
+            // isNaN 함수() : number 타입변환가능하면 false, 아니면 true
+        if(isNaN(age) || age < 1 || age > 130){
+            alert(`${age}는 유효한 값이 아닙니다. \n 1~130사이 숫자 입력`)
+            frm.age.focus();
+            return false;
+
+        }
+        return true;
+        }
+    
+</script>
+<form name="form3" action="https://www.w3schools.com/action_page.php"
+  method="get" onsubmit="return ChkSubmit3()"> <!-- TODO : onsubmit -->
+  나이 (1~130): <input type="text" name="age">
+  <br><br>
+  <input type="submit" value="제출">
+</form>
+
+<hr> <!-- ----------------------------------------------------------------- -->
+<h4>form4 - required,min,max</h4>
+<!-- 브라우저가 자동적으로 필수 요소 체크하여 submit 여부 조정 -->
+<form name="form4" action="https://www.w3schools.com/action_page.php" method="get">
+  First name:                <!-- TODO ↓ -->
+  <input type="text" name="firstname" required> <span class="important">*</span>
+  <br><br>
+  Last name:
+  <input type="text" name="lastname">
+  <br><br>
+  Age(1~130):                      <!-- TODO ↓ -->
+  <input type="number" name="age"  min = "1" max = "130">
+  <br><br>  
+  <button>제출</button>
+</form>
+
+21474836
+
+
+   
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>AJAX API서울시 지하철호선별 역별 승하차 인원 정보</title>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+</head>
+<!-- 
+■서울시 지하철호선별 역별 승하차 인원 정보 
+http://data.seoul.go.kr/dataList/datasetView.do?infId=OA-12914&srvType=A&serviceKind=1&currentPageNo=1
+
+샘플url
+
+XML 버젼
+http://openapi.seoul.go.kr:8088/키값을넣으세요/xml/CardSubwayStatsNew/1/5/20181001
+예) http://openapi.seoul.go.kr:8088/4d46796d7366726f3833774a774955/xml/CardSubwayStatsNew/1/5/20181001  
+
+JSON 버젼
+http://openapi.seoul.go.kr:8088/636d69484b6c6a6d38304d5a757144/json/CardSubwayStatsNew/1/5/20181001
+예) http://openapi.seoul.go.kr:8088/4d46796d7366726f3833774a774955/json/CardSubwayStatsNew/1/5/20181001 
+ -->
+<body>
+<h1>서울시 지하철 승하차 인원 정보</h1>
+<form>
+날짜 (yyyyMMdd): <input type="text" name="date" id="date" value="20240201"/><br><br>
+
+<button type="button" onclick="loadData()">승하차정보 가져오기</button>
+<button type="button" onclick="removeTable()">지우기</button>
+</form>
+<br><br>
+<h2>AJAX + XML</h2>
+<table id="demoXML"></table>
+<hr>
+<h2>AJAX + JSON</h2>
+<table id="demoJSON"></table>
+
+
+<script>
+var api_key = "636d69484b6c6a6d38304d5a757144";
+
+function removeTable(){
+
+	// TODO
+
+}
+
+function loadData() {
+
+	let date = document.getElementById('date').value.trim();
+    let url;
+
+    // JSON
+    url = `http://openapi.seoul.go.kr:8088/${api_key}/json/CardSubwayStatsNew/1/5/${date}`;
+
+    // url 로 요청. (백그라운드로 요청)
+    fetch(url)
+        // .then(response => response.text())   // response 받은뒤 수행.  
+        // .then(text => {
+        //     alert(text);  // 확인용
+        // })
+        .then(response => response.json())  // response 받은 JSON 을 JS obj 변환
+        .then(jsObj => parseJSON(jsObj))
+
+} // end loadData()
+
+function parseXML(xmlDOM) {
+
+	// TODO
+	
+}
+
+function parseJSON(jsObj){
+
+	const table = [];
+
+    table.push("<tr><th>호선</th><th>역명</th><th>승차인원</th><th>하차인원</th></tr>");
+
+    for(row of jsObj.CardSubwayStatsNew.row){
+        table.push(`
+        <tr>
+            <td>${row.LINE_NUM}</td>
+            <td>${row.SUB_STA_NM}</td>
+            <td>${row.RIDE_PASGR_NUM}</td>
+            <td>${row.ALIGHT_PASGR_NUM}</td>
+        </tr>
+        `);
+    }
+
+	
+    document.getElementById('demoJSON').innerHTML = table.join('\n');
+}
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
